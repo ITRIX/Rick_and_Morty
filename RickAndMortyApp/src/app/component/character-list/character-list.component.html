@@ -1,0 +1,29 @@
+    <div class="character-list-container">
+        
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody infiniteScroll [infiniteScrollDistance]=scrollDistance [infiniteScrollThrottle]=throttle
+            scrollWindow = false (scrolled)="loadMore()">
+                <tr *ngFor="let item of characterList; let i = index">
+                    <th scope="row">{{item.id}}</th>
+                    <td>
+                        <div>
+                            <img [src]="item.image" class="img-thumbnail" alt="...">
+                        </div>
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.status}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
