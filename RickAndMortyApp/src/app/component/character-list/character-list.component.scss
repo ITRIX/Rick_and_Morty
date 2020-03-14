@@ -1,0 +1,11 @@
+.character-list-container {
+    height: 100%;
+    overflow: scroll;
+    table {
+        margin-top: 5rem;
+    }
+    img {
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+}
