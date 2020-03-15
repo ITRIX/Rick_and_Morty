@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,8 @@ export class CharactersService {
    *
    * @description - Fetch the character list
    */
-  getCharacterList(searchQuery) {
-    let url;
-    url = `${this.configUrl}${searchQuery}`;
-    return this.http.get(url);
+  getCharacterList(searchQuery: string): Observable<any> {
+    return this.http.get(`${this.configUrl}${searchQuery}`);
   }
 
   /**
@@ -26,10 +25,8 @@ export class CharactersService {
    *
    * @description - Fetch the character by id
    */
-  getCharacterDetails(id) {
-    let url;
-    url = `${this.configUrl}${id}`;
-    return this.http.get(url);
+  getCharacterDetails(id: string): Observable<any> {
+    return this.http.get(`${this.configUrl}${id}`);
   }
 
   /**
@@ -37,7 +34,7 @@ export class CharactersService {
    *
    * @description - Fetch the list of genders
    */
-  getGenderList() {
+  getGenderList(): Array<any> {
     return [
       { id: 0, name: 'Select Gender' },
       { id: 1, name: 'Male' },
@@ -52,7 +49,7 @@ export class CharactersService {
    *
    * @description - Fetch the list of status
    */
-  getstatusList() {
+  getstatusList(): Array<any> {
     return [
       { id: 0, name: 'Select Status' },
       { id: 1, name: 'Alive' },
