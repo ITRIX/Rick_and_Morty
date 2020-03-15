@@ -64,7 +64,7 @@ export class CharacterListComponent implements OnInit {
   }
 
   /**
-   * search
+   * loadMore
    *
    * @description - Triggers when user scroll down the page.
    */

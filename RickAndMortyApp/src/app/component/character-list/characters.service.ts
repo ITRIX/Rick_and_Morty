@@ -22,6 +22,17 @@ export class CharactersService {
   }
 
   /**
+   * getCharacterDetails
+   *
+   * @description - Fetch the character by id
+   */
+  getCharacterDetails(id) {
+    let url;
+    url = `${this.configUrl}${id}`;
+    return this.http.get(url);
+  }
+
+  /**
    * getGenderList
    *
    * @description - Fetch the list of genders
