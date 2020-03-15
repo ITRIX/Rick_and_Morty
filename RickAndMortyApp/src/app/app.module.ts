@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { CharacterListComponent } from './component/character-list/character-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CharacterDetailsComponent } from './component/character-list/character-details/character-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CharacterListComponent
+    CharacterListComponent,
+    CharacterDetailsComponent
   ],
   imports: [
     BrowserModule,
