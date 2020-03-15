@@ -1,6 +1,6 @@
 <div class="character-details-container">
     <img class="previous-btn" src="../../../../assets/back-icon.png" (click)="navigateBack()"/>
-    <div class="row" *ngIf="!isError">
+    <div class="row" *ngIf="!isError && !loading">
         <div class="col-md-8">
             <h2> {{characterDetails?.id}} : {{characterDetails?.name}}</h2>
             <p><strong>Created: </strong> {{characterDetails?.created}} </p>
@@ -29,5 +29,9 @@
     <div class="errorCls" *ngIf="isError">
         <h1>Something went wrong...</h1>
     </div>
+</div>
+<div class="loader" [hidden]="!loading">
+    <img src="../../../assets/loading.gif"/>
+      <span class="loader_label">loading...</span>
 </div>
 

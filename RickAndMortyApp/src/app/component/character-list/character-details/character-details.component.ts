@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CharacterDetailsComponent implements OnInit {
   characterDetails: any = {};
   isError: boolean;
+  loading: boolean;
   constructor(private characterService: CharactersService,
               private router: Router,
               private route: ActivatedRoute
@@ -17,11 +18,14 @@ export class CharacterDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isError = false;
+    this.loading = true;
     const characterID = this.route.snapshot.paramMap.get('id');
     this.characterService.getCharacterDetails(characterID).subscribe((data: any) => {
       this.characterDetails = data;
+      this.loading = false;
     }, (error => {
       this.isError = true;
+      this.loading = false;
     }));
   }
 
