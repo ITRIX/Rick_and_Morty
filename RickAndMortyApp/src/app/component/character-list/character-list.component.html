@@ -1,7 +1,9 @@
 <div class="character-list-container">
     <form [formGroup]="form">
         <div class="row filter-container">
-            <div class="col-md-6 text-left"></div>
+            <div class="col-md-6 text-left">
+                <input class="form-control" id="search" formControlName="userSearchField" placeholder="Search..."/>
+            </div>
             <div class="col-md-3 text-right">
                 <select class="form-control" id="genderfilter" formControlName="gender" (change)="onFilterChange()">
                     <option *ngFor="let gender of genders" [ngValue]="gender">{{gender.name}}</option>

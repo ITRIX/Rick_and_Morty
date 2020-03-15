@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CharactersService } from './characters.service';
 import { CharactersModel, Result } from 'src/app/models/characters.model';
 import { FormGroup, FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character-list',
@@ -23,10 +24,23 @@ export class CharacterListComponent implements OnInit {
     this.genders = this.characterService.getGenderList();
     this.statusList = this.characterService.getstatusList();
     this.form = new FormGroup({
+      userSearchField: new FormControl(''),
       gender: new FormControl(this.genders[0]),
       status: new FormControl(this.statusList[0])
     });
+    this.userSearchFieldControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(value => {
+      this.onFilterChange();
+    });
     this.fetchCharacters();
+  }
+
+  /**
+   * userSearchFieldControl
+   *
+   * @description - returns FormControl object
+   */
+  get userSearchFieldControl() {
+    return this.form.get('userSearchField');
   }
 
   /**
@@ -79,10 +93,12 @@ export class CharacterListComponent implements OnInit {
    * @description - create query params for the api.
    */
   generateQuery() {
-    const genderStr = this.genderControl.value.id ? `gender=${this.genderControl.value.name}` : '';
-    const statusStr = this.statusControl.value.id ? `status=${this.statusControl.value.name}` : '';
-    const query = `${statusStr !== '' ? genderStr + '&' : genderStr}${statusStr}`;
-    return query === '' ? `?page=${this.pageNo}` : `?${query}&page=${this.pageNo}`;
+    const queryArray = [];
+    queryArray.push(`?page=${this.pageNo}`);
+    if (this.userSearchFieldControl.value !== '') { queryArray.push(`&name=${this.userSearchFieldControl.value}`); }
+    if (this.genderControl.value.id) { queryArray.push(`&gender=${this.genderControl.value.name}`); }
+    if (this.statusControl.value.id) { queryArray.push(`&status=${this.statusControl.value.name}`); }
+    return queryArray.join('');
   }
 
   /**
