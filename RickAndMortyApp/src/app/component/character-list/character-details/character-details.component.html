@@ -3,7 +3,7 @@
     <div class="row" *ngIf="!isError && !loading">
         <div class="col-md-8">
             <h2> {{characterDetails?.id}} : {{characterDetails?.name}}</h2>
-            <p><strong>Created: </strong> {{characterDetails?.created}} </p>
+            <p><strong>Created: </strong> {{characterDetails?.created | date}} </p>
             <div class="col-md-12 divider text-center"></div>
             <p><strong>Status: </strong> {{characterDetails?.status}}.</p>
             <p><strong>Species: </strong> {{characterDetails?.species}} </p>
