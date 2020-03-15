@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CharactersService } from './characters.service';
-import { CharactersModel, Result } from 'src/app/models/characters.model';
-import { FormGroup, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { CharactersModel } from 'src/app/models/characters.model';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-character-list',
@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 export class CharacterListComponent implements OnInit {
   characterList: any = [];
   throttle = 300;
-  scrollDistance = 2;
+  scrollDistance = 1;
   pageNo = 1;
   form: FormGroup;
   genders = [];
@@ -39,7 +39,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - returns FormControl object
    */
-  get userSearchFieldControl() {
+  get userSearchFieldControl(): AbstractControl {
     return this.form.get('userSearchField');
   }
 
@@ -48,7 +48,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - returns FormControl object
    */
-  get genderControl() {
+  get genderControl(): AbstractControl {
     return this.form.get('gender');
   }
 
@@ -57,7 +57,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - returns FormControl object
    */
-  get statusControl() {
+  get statusControl(): AbstractControl {
     return this.form.get('status');
   }
 
@@ -66,7 +66,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - fetch all the characters of selected page.
    */
-  fetchCharacters() {
+  fetchCharacters(): void {
     this.loading = true;
     const searchQuery = this.generateQuery();
     this.characterService.getCharacterList(searchQuery).subscribe((data: CharactersModel) => {
@@ -82,7 +82,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - Triggers when user scroll down the page.
    */
-  loadMore() {
+  loadMore(): void {
     this.pageNo += 1;
     this.fetchCharacters();
   }
@@ -92,7 +92,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - create query params for the api.
    */
-  generateQuery() {
+  generateQuery(): string {
     const queryArray = [];
     queryArray.push(`?page=${this.pageNo}`);
     if (this.userSearchFieldControl.value !== '') { queryArray.push(`&name=${this.userSearchFieldControl.value}`); }
@@ -106,7 +106,7 @@ export class CharacterListComponent implements OnInit {
    *
    * @description - Triggers when user selct from dropdowns.
    */
-  onFilterChange() {
+  onFilterChange(): void {
     this.pageNo = 1;
     this.characterList = [];
     this.fetchCharacters();
