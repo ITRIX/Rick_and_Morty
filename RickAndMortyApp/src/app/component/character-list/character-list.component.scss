@@ -3,6 +3,9 @@
     overflow: scroll;
     table {
         margin-top: 1rem;
+        tr {
+            cursor: pointer;
+        }
     }
     img {
         max-width: 3rem;

@@ -1,0 +1,33 @@
+<div class="character-details-container">
+    <img class="previous-btn" src="../../../../assets/back-icon.png" (click)="navigateBack()"/>
+    <div class="row" *ngIf="!isError">
+        <div class="col-md-8">
+            <h2> {{characterDetails?.id}} : {{characterDetails?.name}}</h2>
+            <p><strong>Created: </strong> {{characterDetails?.created}} </p>
+            <div class="col-md-12 divider text-center"></div>
+            <p><strong>Status: </strong> {{characterDetails?.status}}.</p>
+            <p><strong>Species: </strong> {{characterDetails?.species}} </p>
+            <p><strong>Type: </strong> {{characterDetails?.type}} </p>
+            <p><strong>Gender: </strong> {{characterDetails?.gender}} </p>
+
+            <div class="col-md-12 divider text-center"></div>
+            <p><strong>Origin: </strong> <a target="_blank" [href]="characterDetails?.origin?.url">{{characterDetails?.origin?.name}}</a></p>
+            <p><strong>Location: </strong>  <a target="_blank" [href]="characterDetails?.location?.url">{{characterDetails?.location?.name}}</a> </p>
+        </div>
+        <div class="col-md-4">
+            <img class="card-img-top" [src]="characterDetails?.image" alt="character image not avilable" />
+        </div>
+        <div class="col-md-12 divider text-center"></div>
+
+        <div class="col-md-12 episodes-container">
+            <p><strong>Episodes: </strong></p>
+            <ng-container *ngFor="let episode of characterDetails?.episode">
+                <a [href]="episode" target="_blank">{{episode}}</a><br>
+            </ng-container>
+        </div>
+    </div>
+    <div class="errorCls" *ngIf="isError">
+        <h1>Something went wrong...</h1>
+    </div>
+</div>
+
