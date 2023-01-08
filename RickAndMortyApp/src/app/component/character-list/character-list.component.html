@@ -2,7 +2,7 @@
     <form [formGroup]="form">
         <div class="row filter-container">
             <div class="col-md-6 text-left">
-                <input class="form-control" id="search" formControlName="userSearchField" placeholder="Search..."/>
+                <input class="form-control" id="search" formControlName="userSearchField" placeholder="Search..." />
             </div>
             <div class="col-md-3 text-right">
                 <select class="form-control" id="genderfilter" formControlName="gender" (change)="onFilterChange()">
@@ -18,34 +18,35 @@
             </div>
         </div>
     </form>
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody infiniteScroll [infiniteScrollDistance]=scrollDistance [infiniteScrollThrottle]=throttle
-            scrollWindow=false (scrolled)="loadMore()">
-            <tr *ngFor="let item of characterList; let i = index" [routerLink]="['/character-details', item.id]">
-                <th scope="row">{{i +1 }}</th>
-                <td>
-                    <div>
+    <ng-container *ngIf="characters$ | async as characterList else loading">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody infiniteScroll [infiniteScrollDistance]=scrollDistance [infiniteScrollThrottle]=throttle
+                scrollWindow=false (scrolled)="loadMore()">
+                <tr *ngFor="let item of characterList; let i = index" [routerLink]="['/character-details', item.id]">
+                    <th scope="row">{{i +1 }}</th>
+                    <td>
                         <img [src]="item.image" class="img-thumbnail" alt="...">
-                    </div>
-                </td>
-                <td>{{item.name}}</td>
-                <td>{{item.gender}}</td>
-                <td>{{item.status}}</td>
-            </tr>
-
-        </tbody>
-    </table>
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.gender}}</td>
+                    <td>{{item.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>
-<div class="loader" [hidden]="!loading">
-    <img src="../../../assets/loading.gif"/>
-      <span class="loader_label">loading...</span>
-</div>
+<ng-template #loading>
+    <div class="loader">
+        <img src="../../../assets/loading.gif" />
+        <span class="loader_label">loading...</span>
+    </div>
+</ng-template>

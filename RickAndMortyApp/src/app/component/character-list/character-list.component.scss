@@ -1,6 +1,5 @@
 .character-list-container {
     height: 100%;
-    overflow: scroll;
     table {
         margin-top: 1rem;
         tr {
@@ -10,15 +9,10 @@
     img {
         max-width: 3rem;
         max-height: 3rem;
+        object-fit: cover;
+        border-radius: 50%;
     }
     .filter-container {
         margin-top: 5rem;
-    }
-}
-
-.loader {
-    text-align: center;
-    img {
-        width: 2%;
     }
 }

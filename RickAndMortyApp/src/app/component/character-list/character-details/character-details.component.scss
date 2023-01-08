@@ -14,7 +14,7 @@
         margin: 1.2rem 0 1.2rem 0;
     }
 
-    img {
+    .card-img-top {
         width: 90%;
         border: 1px solid #0a0a0a;
     }
@@ -26,18 +26,5 @@
             margin-right: 0.5rem;
             border: 1px solid #dee2e6!important;
         }
-    }
-
-    .errorCls {
-        text-align: center;
-        margin-top: 10rem;;
-    }
-}
-
-.loader {
-    margin-top: 5rem;
-    text-align: center;
-    img {
-        width: 2%;
     }
 }
